@@ -10,6 +10,9 @@ final class Movie: Model, Content {
     @Field(key: "title")
     var title: String
     
+    @Field(key: "poster")
+    var poster: String
+    
     // hasMany: Movie has many reviews
     @Children(for: \.$movie)
     var reviews: [Review]
