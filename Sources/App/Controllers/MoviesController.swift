@@ -10,4 +10,12 @@ final class MoviesController {
     func getAll(_ req: Request) -> EventLoopFuture<[Movie]> {
         Movie.query(on: req.db).all()
     }
+    
+    func delete(_ req: Request) -> EventLoopFuture<HTTPStatus> {
+        Movie.find(req.parameters.get("movieId"), on: req.db)
+            .unwrap(or: Abort(.notFound))
+            .flatMap {
+                $0.delete(on: req.db)
+            }.transform(to: .ok)
+    }
 }

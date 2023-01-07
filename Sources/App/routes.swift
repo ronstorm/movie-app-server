@@ -10,4 +10,7 @@ func routes(_ app: Application) throws {
     
     // GET /movies
     app.get("movies", use: moviesController.getAll)
+    
+    // DELETE /movies/movieId
+    app.delete("movies", ":movieId", use: moviesController.delete)
 }
